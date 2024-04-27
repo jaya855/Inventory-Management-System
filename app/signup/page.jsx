@@ -1,4 +1,5 @@
 "use client"
+import axios from 'axios'
 import React from 'react';
 import { useState } from 'react';
 import Link from 'next/link'
@@ -8,7 +9,7 @@ import Navbar from '@/components/Navbar';
 
 const Login = () => {
   const router = useRouter()
-  const [formData,setFormData]=useState({name:"",username:"",password:""})
+  const [formData,setFormData]=useState({name:"",email:"",password:""})
 
   const handleChange=(e)=>{
     const { value, name } = e.target;
@@ -18,8 +19,19 @@ const Login = () => {
 
     }));
   }
-  const submitHandler=()=>{
-    router.push('/stocks')
+  const submitHandler=async(e)=>{
+     e.preventDefault();
+     try{
+        const res= await axios.post("http://localhost:3000/api/signup",formData);
+        console.log(res.data.message)
+        console.log("signup successful")
+        router.push("/login")
+     }
+     catch(error){
+       console.log(error)
+     }
+   
+    
   }
   return (
     <div>
@@ -43,17 +55,17 @@ const Login = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-rose-950 text-sm font-bold mb-2" htmlFor="username">
-            Username:
+          <label className="block text-rose-950 text-sm font-bold mb-2" htmlFor="email">
+            Email:
           </label>
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="username"
+            id="email"
             type="text"
-            placeholder='enter your username'
+            placeholder='enter your email'
             required
-            name="username"
-            value={formData.username}
+            name="email"
+            value={formData.email}
             onChange={handleChange}
           />
         </div>
@@ -77,7 +89,7 @@ const Login = () => {
           <button
             className="bg-rose-950 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
-            onSubmit={submitHandler}
+            onClick={submitHandler}
           >
             Signup
           </button>

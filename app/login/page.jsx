@@ -9,7 +9,7 @@ import Navbar from '@/components/Navbar';
 
 const Login = () => {
   const router = useRouter()
-  const [formData,setFormData]=useState({username:"",password:""})
+  const [formData,setFormData]=useState({email:"",password:""})
 
   const handleChange=(e)=>{
     const { value, name } = e.target;
@@ -29,17 +29,17 @@ const Login = () => {
       <form className="bg-[#F1EEDC] shadow-md rounded px-8 pt-6 pb-8 mb-4 w-96">
         <h2 className="text-2xl font-bold mb-4 text-rose-950">Login</h2>
         <div className="mb-4">
-          <label className="block text-rose-950 text-sm font-bold mb-2" htmlFor="username">
-            Username:
+          <label className="block text-rose-950 text-sm font-bold mb-2" htmlFor="email">
+            Email:
           </label>
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="username"
+            id="email"
             type="text"
-            placeholder='enter your username'
+            placeholder='enter your email'
             required
-            name="username"
-            value={formData.username}
+            name="email"
+            value={formData.email}
             onChange={handleChange}
           />
         </div>
@@ -63,7 +63,7 @@ const Login = () => {
           <button
             className="bg-rose-950 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
-            onSubmit={submitHandler}
+            onClick={submitHandler}
           >
             Login
           </button>
