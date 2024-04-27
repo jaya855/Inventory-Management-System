@@ -1,8 +1,9 @@
 'use client'
 import React from 'react';
 import { useState } from 'react';
-// import { Link } from 'next/link';
+import  Link  from 'next/link';
 import { useRouter } from 'next/navigation'; 
+import Navbar from '@/components/Navbar';
 
 
 
@@ -22,6 +23,8 @@ const Login = () => {
     router.push('/stocks')
   }
   return (
+    <div>
+    <Navbar/>
     <div className="flex justify-center items-center my-[10rem]">
       <form className="bg-[#F1EEDC] shadow-md rounded px-8 pt-6 pb-8 mb-4 w-96">
         <h2 className="text-2xl font-bold mb-4 text-rose-950">Login</h2>
@@ -64,11 +67,12 @@ const Login = () => {
           >
             Login
           </button>
-          {/* <Link to="/signup" className="text-sm text-gray-600 hover:underline">
+           <Link href="/signup" className="text-sm text-gray-600 hover:underline">
             Not registered? Sign up here.
-          </Link> */}
+          </Link> 
         </div>
       </form>
+    </div>
     </div>
   );
 };
