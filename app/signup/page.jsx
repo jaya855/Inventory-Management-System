@@ -1,5 +1,5 @@
 "use client"
-import axios from 'axios'
+import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
 import Link from 'next/link'
@@ -20,6 +20,7 @@ const Login = () => {
     }));
   }
   const submitHandler=async(e)=>{
+    console.log({formData})
      e.preventDefault();
      try{
         const res= await axios.post("http://localhost:3000/api/signup",formData);

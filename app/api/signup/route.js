@@ -1,40 +1,43 @@
-import dbconnect from "@/lib/dbconnect";
-import User from "@/lib/Models/User";
-export default  signup= async (req,res) => {
-    console.log("hii jaya from signup backend")
-        dbconnect()
-        try {
-            const {name, email,password } = req.body;
-            console.log(req.body);
-            let check=false;
-            let existingdata=await User.findOne({ email })
-            if (existingdata) {
-                check=true;
-                console.log("inside bro")
-                return res.status(409).json({
-                    success: false,
-                    message: "user already registered"
-    
-                });
-    
-            }
-           
-            if(check==false) 
-            console.log("1");
-            let data=req.body
-            let newuser =await  User.create({name, email,password });
-           res.status(201).json({
-                success: true,
-                message: "user registration done successful"
-            });
-            console.log("4");
-        }
-        catch (error) {
-            res.status(500).json({
-                
-                success: false,
-                message: "user registration failed due to some interal server issues"
-            });
-        }
-}
 
+
+import dbConnect from "@/lib/dbconnect";
+import User from "@/lib/Models/User";
+import { NextResponse } from "next/server";
+
+export async function POST(req) {
+  try {
+    await dbConnect();
+
+    const { name, email, password } = await req.json();
+    console.log({ name, email, password });
+
+    const existingData = await User.findOne({ email });
+    if (existingData) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "User already registered",
+        },
+        { status: 409 }
+      );
+    }
+
+    const newUser = await User.create({ name, email, password });
+    return NextResponse.json(
+      {
+        success: true,
+        message: "User registration done successfully",
+      },
+      { status: 201 }
+    );
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      {
+        success: false,
+        message: "User registration failed due to some internal server issues",
+      },
+      { status: 500 }
+    );
+  }
+}
