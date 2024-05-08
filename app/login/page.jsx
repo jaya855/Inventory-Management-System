@@ -4,7 +4,7 @@ import { useState } from 'react';
 import  Link  from 'next/link';
 import { useRouter } from 'next/navigation'; 
 import Navbar from '@/components/Navbar';
-
+import axios from "axios"
 
 
 const Login = () => {
@@ -19,8 +19,18 @@ const Login = () => {
 
     }));
   }
-  const submitHandler=()=>{
-    router.push('/stocks')
+  const submitHandler=async(e)=>{
+    e.preventDefault();
+    try{
+      const res =await axios.post("http://localhost:3000/api/login",formData);
+      console.log(res.data.message)
+      router.push('/stocks')
+
+    }
+    catch(e){
+    console.log(e);
+    }
+
   }
   return (
     <div>
