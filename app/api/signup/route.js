@@ -3,6 +3,7 @@
 import dbConnect from "@/lib/dbconnect";
 import User from "@/lib/Models/User";
 import { NextResponse } from "next/server";
+import bcrypt from "bcryptjs"
 
 export async function POST(req) {
   try {
@@ -21,8 +22,9 @@ export async function POST(req) {
         { status: 409 }
       );
     }
+    const newPass=await bcrypt.hash(password,10);
 
-    const newUser = await User.create({ name, email, password });
+    const newUser = await User.create({ name, email, password:newPass });
     return NextResponse.json(
       {
         success: true,

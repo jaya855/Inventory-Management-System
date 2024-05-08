@@ -1,6 +1,7 @@
 import dbConnect from "@/lib/dbconnect";
 import User from "@/lib/Models/User";
 import { NextResponse } from "next/server";
+import bcrypt from "bcryptjs"
 
 export async function POST(req){
   try{
@@ -19,7 +20,8 @@ export async function POST(req){
         { status: 401 }
       );
     }
-    if(password!==existingData.password){
+    const abc=bcrypt.compare(password,existingData.password)
+    if(!abc){
         return NextResponse.json(
             {
               success: false,
