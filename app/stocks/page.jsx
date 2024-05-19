@@ -12,9 +12,23 @@ import Paper from '@mui/material/Paper';
 // import LoadingSpinner from "@/components/LoadingSpinner";
 
 const Stock = () => {
+  const handleQuantityChange = async (id, type) => {
+    try {
+      const updateQuantity = await axios.put(
+        "http://localhost:3000/api/updateQuantity",
+        { id, type }
+      );
+      getProducts();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   // const [loading, setLoading] = useState(false);
-   const handleDelete=async({id})=>{
-    console.log("i am clicked")
+   const handleDelete=async(id)=>{
+    console.log("i am clicked",id)
+    
+   
     try{
         const delOne=await axios.delete(`http://localhost:3000/api/deleteProduct?id=${id}`)
         getProducts()
@@ -144,7 +158,7 @@ const Stock = () => {
                 <TableCell align="left">Product</TableCell>
                 <TableCell align="left">Price</TableCell>
                 <TableCell align="left">Quantity</TableCell>
-                <TableCell align="left"></TableCell>
+                <TableCell align="left">Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -157,9 +171,17 @@ const Stock = () => {
                   <TableCell align="left">{row.slug}</TableCell>
 
                   <TableCell align="left">{row.price}</TableCell>
-                  <TableCell align="left">{row.quantity}</TableCell>
                   <TableCell align="left">
-                  <button type="button" class="close" aria-label="Close" onClick={()=>handleDelete(row._id)}>
+                    <button className="h-5 w-7 bg-rose-950 rounded-xl text-white m-1" onClick={() => handleQuantityChange(row._id, "decrease")}
+                    >-</button>
+                    {row.quantity}
+                    <button className="h-5 w-7 bg-rose-950 rounded-xl text-white m-1" onClick={() => handleQuantityChange(row._id, "increase")}
+                    >+</button>
+                    </TableCell>
+                    
+                    
+                  <TableCell align="left">
+                  <button type="button" className="close text-2xl" aria-label="Close" onClick={()=>handleDelete(row._id)}>
                     <span aria-hidden="true">&times;</span>
                   </button>
                   </TableCell>
@@ -168,7 +190,11 @@ const Stock = () => {
             </TableBody>
           </Table>
         </TableContainer>
-         {/* )} */}
+
+
+
+
+
         </div>
       </div>
     </div>
