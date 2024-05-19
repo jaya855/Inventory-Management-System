@@ -28,7 +28,9 @@ const Stock = () => {
 
     try{
       const response = await axios.get(`http://localhost:3000/api/search?q=${searchProd}`);
-      setGetData(filtered.data.prods)
+      console.log("jaya")
+      console.log(response.data.prods)
+      setGetData(response.data.prods)
     }
     catch(e){
       console.log(e)
