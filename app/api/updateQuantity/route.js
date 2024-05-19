@@ -1,7 +1,6 @@
 import dbConnect from "@/lib/dbconnect";
 import Product from "@/lib/Models/Stocks";
 import { NextResponse } from "next/server";
-
 export async function PUT(req){
   
     try {

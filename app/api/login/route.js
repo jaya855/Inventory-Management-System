@@ -2,8 +2,12 @@ import dbConnect from "@/lib/dbconnect";
 import User from "@/lib/Models/User";
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs"
+import jwt from "jsonwebtoken";
+import * as dotenv from 'dotenv'
+dotenv.config()
 
 export async function POST(req){
+  const secretkey =process.env.secretKey 
   try{
     await dbConnect();
 
@@ -30,10 +34,14 @@ export async function POST(req){
             { status: 405 }
           );
     }
+    const payload = { userId: existingData._id };
+    const token = jwt.sign(payload, secretkey, { expiresIn: "1h" });
+
     return NextResponse.json(
         {
           success: true,
           message: "login successful",
+          token:token
         },
         { status: 201 }
       );

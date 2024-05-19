@@ -24,6 +24,7 @@ const Login = () => {
     try{
       const res =await axios.post("http://localhost:3000/api/login",formData);
       console.log(res.data.message)
+      localStorage.setItem("token",res.data.token)
       router.push('/stocks')
 
     }
