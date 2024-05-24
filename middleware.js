@@ -1,24 +1,9 @@
-// middleware.js
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export function middleware(req) {
-  const { pathname } = req;
- 
-  if (pathname === '/stocks') {
-    const token=localStorage.getItem("token")
-    
+export default function middleware(request: NextRequest) {
+  let currentUser = request.cookies.get('currentUser')?.value;
 
-    if (!token) {
-      
-      return NextResponse.redirect(new URL('/login', req.url));
-    }
-    return NextResponse.next();
+  if (!currentUser && request.url.includes('stocks')) {
+    return NextResponse.redirect(new URL('/', request.url));
   }
-
-  
-  return NextResponse.next();
 }
-
-export const config = {
-  matcher: ['/stocks'],
-};
