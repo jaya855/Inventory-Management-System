@@ -1,5 +1,4 @@
 'use client'
-import Cookies from "js-cookie";
 
 import React from 'react'
 import { useRouter } from 'next/navigation'; 
@@ -13,9 +12,8 @@ const Navbar = () => {
   }
   const handleLogout = () => {
     localStorage.setItem("token", "");
-    Cookies.remove("currentUser");
-
-    router.push('/'); // Redirecting to login after logout
+   
+    router.push('/'); 
   };
   const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
   return (

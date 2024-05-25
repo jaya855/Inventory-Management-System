@@ -37,7 +37,7 @@ export async function POST(req){
     const payload = { userId: existingData._id };
     const token = jwt.sign(payload, secretkey, { expiresIn: "1h" });
 
-    return NextResponse.json(
+    const ress= NextResponse.json(
         {
           success: true,
           message: "login successful",
@@ -45,6 +45,12 @@ export async function POST(req){
         },
         { status: 201 }
       );
+
+      ress.cookies.set("authToken",token,{
+        expiresIn:"1d",
+        httpOnly:true
+      })
+      return ress;
 
   }
   catch(e){

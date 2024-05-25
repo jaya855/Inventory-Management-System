@@ -5,7 +5,7 @@ import  Link  from 'next/link';
 import { useRouter } from 'next/navigation'; 
 import Navbar from '@/components/Navbar';
 import axios from "axios"
-import Cookies from "js-cookie";
+
 
 
 
@@ -27,7 +27,7 @@ const Login = () => {
       const res =await axios.post("http://localhost:3000/api/login",formData);
       console.log(res.data.message)
       localStorage.setItem("token",res.data.token)
-      Cookies.set("currentUser", "true");
+     
       router.push('/stocks')
 
     }
