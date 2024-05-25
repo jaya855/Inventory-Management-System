@@ -1,5 +1,7 @@
 "use client"
 import Navbar from "@/components/Navbar";
+import { toast } from 'react-hot-toast';
+
 import axios from "axios"
 import React, { useState ,useEffect} from 'react';
 import Table from '@mui/material/Table';
@@ -32,7 +34,7 @@ const Stock = () => {
     try{
         const delOne=await axios.delete(`http://localhost:3000/api/deleteProduct?id=${id}`)
         getProducts()
-
+        toast.success('product deleted successfully');
     }
     catch(e){
       console.log(e)
@@ -101,6 +103,7 @@ const Stock = () => {
      console.log(ress.data.message)
      getProducts()
      setAddData({"slug":"","price":"","quantity":""})
+     toast.success('product added successfully');
     }
     catch(e){
       console.log(e)
