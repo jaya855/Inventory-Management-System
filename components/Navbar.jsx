@@ -13,7 +13,9 @@ const Navbar = () => {
   }
   const handleLogout = () => {
     localStorage.removeItem("token");
-    Cookies.remove('authToken');
+    // Cookies.remove('authToken', { path: '/' });
+    const expirationDate = new Date(0);
+    document.cookie = `authToken=; expires=${expirationDate.toUTCString()}; path=/`;
    
     router.push('/'); 
   };

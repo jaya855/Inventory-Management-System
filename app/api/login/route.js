@@ -46,10 +46,12 @@ export async function POST(req){
         { status: 201 }
       );
 
-      ress.cookies.set("authToken",token,{
-        expiresIn:"1d",
-        httpOnly:true
-      })
+      ress.cookies.set("authToken", token, {
+        maxAge: 24 * 60 * 60 * 1000, // 1 day
+        httpOnly: true,
+        sameSite: 'Strict',
+        path: '/',
+      });
       return ress;
 
   }
