@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import { useRouter } from 'next/navigation'; 
+import Cookies from 'js-cookie';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -14,7 +15,7 @@ const HeroSection = () => {
   }
   const handleLogout = () => {
     localStorage.setItem("token", "");
-   
+    Cookies.remove('authToken');
 
     router.push('/login'); // Redirecting to login after logout
   };

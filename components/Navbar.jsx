@@ -1,5 +1,6 @@
 'use client'
 
+import Cookies from 'js-cookie';
 import React from 'react'
 import { useRouter } from 'next/navigation'; 
 const Navbar = () => {
@@ -11,7 +12,8 @@ const Navbar = () => {
     router.push('/');
   }
   const handleLogout = () => {
-    localStorage.setItem("token", "");
+    localStorage.removeItem("token");
+    Cookies.remove('authToken');
    
     router.push('/'); 
   };

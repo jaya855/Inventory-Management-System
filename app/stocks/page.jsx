@@ -17,7 +17,7 @@ const Stock = () => {
   const handleQuantityChange = async (id, type) => {
     try {
       const updateQuantity = await axios.put(
-        "http://localhost:3000/api/updateQuantity",
+        "/api/updateQuantity",
         { id, type }
       );
       getProducts();
@@ -32,7 +32,7 @@ const Stock = () => {
     
    
     try{
-        const delOne=await axios.delete(`http://localhost:3000/api/deleteProduct?id=${id}`)
+        const delOne=await axios.delete(`/api/deleteProduct?id=${id}`)
         getProducts()
         toast.success('product deleted successfully');
     }
@@ -51,7 +51,7 @@ const Stock = () => {
     e.preventDefault();
 
     try{
-      const response = await axios.get(`http://localhost:3000/api/search?q=${searchProd}`);
+      const response = await axios.get(`/api/search?q=${searchProd}`);
       console.log("jaya")
       console.log(response.data.prods)
       setGetData(response.data.prods)
@@ -81,7 +81,7 @@ const Stock = () => {
   const getProducts =async()=>{
 
     try{
-    const result=await axios.get("http://localhost:3000/api/getStock");
+    const result=await axios.get("/api/getStock");
     console.log(result.data)
     setGetData(result.data.prods)
     }
@@ -99,7 +99,7 @@ const Stock = () => {
     e.preventDefault()
 
     try{
-     const ress=await axios.post("http://localhost:3000/api/addStock",addData);
+     const ress=await axios.post("/api/addStock",addData);
      console.log(ress.data.message)
      getProducts()
      setAddData({"slug":"","price":"","quantity":""})

@@ -23,7 +23,7 @@ const Login = () => {
     console.log({formData})
      e.preventDefault();
      try{
-        const res= await axios.post("http://localhost:3000/api/signup",formData);
+        const res= await axios.post("/api/signup",formData);
         console.log(res.data.message)
         console.log("signup successful")
         router.push("/login")

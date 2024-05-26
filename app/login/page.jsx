@@ -24,7 +24,7 @@ const Login = () => {
   const submitHandler=async(e)=>{
     e.preventDefault();
     try{
-      const res =await axios.post("http://localhost:3000/api/login",formData);
+      const res =await axios.post("/api/login",formData);
       console.log(res.data.message)
       localStorage.setItem("token",res.data.token)
      
