@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import { useRouter } from 'next/navigation'; 
+import deleteCookie from 'cookies-next'
 // import Cookies from 'js-cookie';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -13,11 +14,18 @@ const HeroSection = () => {
     router.push('/login');
    
   }
+
+ 
   const handleLogout = () => {
     localStorage.setItem("token", "");
     // Cookies.remove('authToken', { path: '/' });
-    const expirationDate = new Date(0);
-    document.cookie = `authToken=; expires=${expirationDate.toUTCString()}; path=/`;
+    // const expirationDate = new Date(0);
+    // document.cookie = `authToken=; expires=${expirationDate.toUTCString()}; path=/`;
+    // deleteCookie('authToken', {
+    //   path: '/',
+    //   expiresIn: "1d",
+    //   httpOnly: true,
+    // });
 
     router.push('/login'); // Redirecting to login after logout
   };

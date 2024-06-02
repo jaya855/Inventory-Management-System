@@ -1,6 +1,7 @@
 'use client'
 
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
+  import deleteCookie from 'cookies-next'
 import React from 'react'
 import { useRouter } from 'next/navigation'; 
 const Navbar = () => {
@@ -14,9 +15,13 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     // Cookies.remove('authToken', { path: '/' });
-    const expirationDate = new Date(0);
-    document.cookie = `authToken=; expires=${expirationDate.toUTCString()}; path=/`;
-   
+    // const expirationDate = new Date(0);
+    // document.cookie = `authToken=; expires=${expirationDate.toUTCString()}; path=/`;
+    // deleteCookie('authToken', {
+    //   path: '/',
+    //   expiresIn: "1d",
+    //   httpOnly: true,
+    // });
     router.push('/'); 
   };
   const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;

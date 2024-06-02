@@ -27,10 +27,9 @@ const Stock = () => {
   };
 
   // const [loading, setLoading] = useState(false);
+
    const handleDelete=async(id)=>{
     console.log("i am clicked",id)
-    
-   
     try{
         const delOne=await axios.delete(`/api/deleteProduct?id=${id}`)
         getProducts()

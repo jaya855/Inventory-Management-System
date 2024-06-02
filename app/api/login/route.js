@@ -47,9 +47,9 @@ export async function POST(req){
       );
 
       ress.cookies.set("authToken", token, {
-        maxAge: 24 * 60 * 60 * 1000, // 1 day
+        expiresIn: "1d",
         httpOnly: true,
-        sameSite: 'Strict',
+        // sameSite: 'Strict',
         path: '/',
       });
       return ress;
